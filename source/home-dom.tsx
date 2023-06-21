@@ -5,7 +5,6 @@ import { hydrateRoot } from "react-dom/client";
 import { BeerList } from "#beer-list";
 
 function main() {
-  console.log('hi')
   hydrateRoot(
     document.getElementById("home-page"),
     <BeerList beers={beers} />,
@@ -13,5 +12,3 @@ function main() {
 }
 
 main();
-
-export { main };

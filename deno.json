@@ -1,11 +1,14 @@
 {
     "imports": {
+        "#http/server": "https://deno.land/std@0.192.0/http/server.ts",
+        "#http/file_server": "https://deno.land/std@0.192.0/http/file_server.ts",
+        "#path": "https://deno.land/std@0.192.0/path/mod.ts",
+        "#fs": "https://deno.land/std@0.192.0/fs/mod.ts",
+        "#emit": "https://deno.land/x/emit/mod.ts",
         "react": "npm:react",
         "react-dom": "npm:react-dom",
         "react-dom/client": "npm:react-dom/client",
         "react-dom/server": "npm:react-dom/server",
-        "#http/server": "https://deno.land/std@0.192.0/http/server.ts",
-        "#http/file_server": "https://deno.land/std@0.192.0/http/file_server.ts",
         "#functions": "./source/functions.ts",
         "#home": "./source/home.tsx",
         "#beer": "./source/beer.tsx",
@@ -17,7 +20,8 @@
     },
     "tasks": {
         "start": "deno run --allow-net --allow-read --allow-env server.ts",
-        "dev": "deno run --allow-net --allow-read --allow-env --watch server.ts"
+        "dev": "deno run --allow-net --allow-read --allow-env --watch server.ts",
+        "transpile": "deno run -A transpile.ts"
     },
     "compilerOptions": {
         "types": [
@@ -25,7 +29,6 @@
             "https://unpkg.com/@types/react@18.2.13/index.d.ts",
             "https://unpkg.com/@types/react-dom@18.2.6/index.d.ts"
         ],
-        "target": "esnext",
         "lib": [
             "dom",
             "dom.iterable",
