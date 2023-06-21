@@ -9,6 +9,8 @@
         "#functions": "./source/functions.ts",
         "#home": "./source/home.tsx",
         "#beer": "./source/beer.tsx",
+        "#beer-detail": "./source/components/beer-detail.tsx",
+        "#beer-list": "./source/components/beer-list.tsx",
         "#request-handler": "./source/request-handler.ts",
         "#on-listen": "./source/on-listen.ts",
         "#types": "./source/types.ts"
@@ -18,8 +20,6 @@
         "dev": "deno run --allow-net --allow-read --allow-env --watch server.ts"
     },
     "compilerOptions": {
-        "jsx": "react-jsx",
-        "jsxImportSource": "npm:react",
         "types": [
             "",
             "https://unpkg.com/@types/react@18.2.13/index.d.ts",

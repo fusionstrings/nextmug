@@ -48,7 +48,7 @@ export type Malt = {
 export type Method = {
     mash_temp:    MashTemp[];
     fermentation: Fermentation;
-    twist:        null;
+    twist:        string | null;
 }
 
 export type Fermentation = {
@@ -59,3 +59,5 @@ export type MashTemp = {
     temp:     BoilVolume;
     duration: number;
 }
+
+export type Properties = Pick<Beer, "abv" | "ibu" | "target_og" | "target_fg" | "ebc" | "srm" | "ph" | "attenuation_level" | "volume" | "boil_volume" | "method" | "first_brewed" | "description">

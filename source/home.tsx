@@ -1,14 +1,16 @@
+import * as React from 'react';
 import { renderToReadableStream } from "react-dom/server";
-import { Home } from "./components/home.tsx";
-import type { Beer } from "#types";
+import { HomePage } from "./components/home-page.tsx";
 async function requestHandlerHTTP() {
 
   const beers = await import("https://api.punkapi.com/v2/beers", {
     assert: { type: "json" },
   });
 
-  const stream = await renderToReadableStream(<Home beers={beers?.default} />, {
-    bootstrapModules: ["/js/main.js"],
+  const importmap = await Deno.readTextFile(`${Deno.cwd()}/importmap.json`);
+
+  const stream = await renderToReadableStream(<HomePage importmap={importmap} beers={beers?.default} />, {
+    bootstrapModules: ["/js/home-dom.tsx.js"],
   });
   
   

@@ -1,7 +1,8 @@
-import { Fragment } from "react";
-function Beer({ beer }) {
+import * as React from 'react';
+
+function BeerPage({ beer }) {
   return (
-    <Fragment>
+    <React.Fragment>
     <header>
       <h1>Next Mug</h1>
       <nav>
@@ -20,8 +21,8 @@ function Beer({ beer }) {
       </pre>
     </main>
     <footer></footer>
-  </Fragment>
+  </React.Fragment>
   );
 }
 
-export { Beer };
+export { BeerPage };
