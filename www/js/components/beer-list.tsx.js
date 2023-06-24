@@ -1,6 +1,7 @@
 import * as React from "react";
 import { BeerOverview } from "#beer-detail";
-function SearchForm({ onSubmit , onInput , value , showAdvanceSearch , filteredBeerList , handleMinAbvChange , handleMaxAbvChange , minAbv , maxAbv  }) {
+function SearchForm({ onSubmit , onInput , value , filteredBeerList , handleMinAbvChange , handleMaxAbvChange , minAbv , maxAbv  }) {
+    const beerList = Object.entries(filteredBeerList);
     return /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("form", {
         method: "GET",
         action: "/beers",
@@ -17,15 +18,15 @@ function SearchForm({ onSubmit , onInput , value , showAdvanceSearch , filteredB
         onInput: onInput,
         value: value,
         list: "beer-names"
-    }), filteredBeerList.length > 0 && /*#__PURE__*/ React.createElement("datalist", {
+    }), beerList.length > 0 && /*#__PURE__*/ React.createElement("datalist", {
         id: "beer-names"
-    }, filteredBeerList.map((beer)=>/*#__PURE__*/ React.createElement("option", {
-            key: beer.id,
+    }, beerList.map(([id, beer])=>/*#__PURE__*/ React.createElement("option", {
+            key: id,
             value: beer.name
         }, "(ABV: ", beer.abv, "%)"))), /*#__PURE__*/ React.createElement("button", {
         type: "submit"
     }, "Search"), /*#__PURE__*/ React.createElement("fieldset", {
-        className: `search-functions ${showAdvanceSearch ? "show" : "hide"}`
+        className: `search-functions`
     }, /*#__PURE__*/ React.createElement("div", {
         className: "abv-range-min"
     }, /*#__PURE__*/ React.createElement("label", {
@@ -65,9 +66,9 @@ function SearchForm({ onSubmit , onInput , value , showAdvanceSearch , filteredB
     }, "Random Beer"))));
 }
 function BeerList({ beers  }) {
+    const [allBeers, setAllBeers] = React.useState(beers);
+    const [filteredBeerList, setFilteredBeerList] = React.useState(allBeers);
     const [searchTerm, setSearchTerm] = React.useState("");
-    const [filteredBeerList, setFilteredBeerList] = React.useState(beers);
-    const [showAdvanceSearch, setShowAdvanceSearch] = React.useState(false);
     const [minAbv, setMinAbv] = React.useState(0);
     const [maxAbv, setMaxAbv] = React.useState(20);
     function handleSearchInput(event) {
@@ -87,12 +88,15 @@ function BeerList({ beers  }) {
         event.preventDefault();
     }
     React.useEffect(()=>{
-        const filteredResults = beers.filter((beer)=>{
-            const nameMatch = beer.name.toLowerCase().includes(searchTerm.toLowerCase());
-            const abvMatch = (!minAbv || beer.abv >= minAbv) && (!maxAbv || beer.abv <= maxAbv);
-            return nameMatch && abvMatch;
-        });
-        setFilteredBeerList(filteredResults);
+        const filteredData = {};
+        for (const [key, value] of Object.entries(allBeers)){
+            const nameMatch = value.name.toLowerCase().includes(searchTerm.toLowerCase());
+            const abvMatch = (!minAbv || value.abv >= minAbv) && (!maxAbv || value.abv <= maxAbv);
+            if (nameMatch && abvMatch) {
+                filteredData[key] = value;
+            }
+        }
+        setFilteredBeerList(filteredData);
     }, [
         searchTerm,
         minAbv,
@@ -102,7 +106,6 @@ function BeerList({ beers  }) {
         value: searchTerm,
         onSubmit: handleSearchFormSubmit,
         onInput: handleSearchInput,
-        showAdvanceSearch: showAdvanceSearch,
         filteredBeerList: filteredBeerList,
         handleMinAbvChange: handleMinAbvChange,
         handleMaxAbvChange: handleMaxAbvChange,
@@ -110,8 +113,8 @@ function BeerList({ beers  }) {
         maxAbv: maxAbv
     }), /*#__PURE__*/ React.createElement("div", {
         className: "beer-catalog"
-    }, filteredBeerList.map((beer)=>/*#__PURE__*/ React.createElement(BeerOverview, {
-            key: beer.id,
+    }, Object.entries(filteredBeerList).map(([id, beer])=>/*#__PURE__*/ React.createElement(BeerOverview, {
+            key: id,
             ...beer
         }))));
 }

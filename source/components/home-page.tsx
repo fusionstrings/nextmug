@@ -3,7 +3,7 @@ import { BeerList } from "#beer-list";
 import type { Beer } from "#types";
 
 function HomePage(
-  { beers, importmap }: { beers: Beer[]; importmap: string },
+  { beers, importmap }: { importmap: string },
 ) {
   return (
     <html lang="en">

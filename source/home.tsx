@@ -1,21 +1,27 @@
-import * as React from 'react';
+import * as React from "react";
 import { renderToReadableStream } from "react-dom/server";
 import { HomePage } from "./components/home-page.tsx";
-async function requestHandlerHTTP() {
+import { api } from "#functions";
 
-  const beers = await import("https://api.punkapi.com/v2/beers", {
-    assert: { type: "json" },
-  });
+async function requestHandlerHTTP(request: Request) {
+  try {
+    const beers = await api(request.url);
 
-  const importmap = await Deno.readTextFile(`${Deno.cwd()}/importmap.json`);
+    const importmap = await Deno.readTextFile(`${Deno.cwd()}/importmap.json`);
 
-  const stream = await renderToReadableStream(<HomePage importmap={importmap} beers={beers?.default} />, {
-    bootstrapModules: ["/js/home-dom.tsx.js"],
-  });
-  
-  return new Response(stream, {
-    headers: { "content-type": "text/html" },
-  });
+    const stream = await renderToReadableStream(
+      <HomePage importmap={importmap} beers={beers} />,
+      {
+        bootstrapModules: ["/js/home-dom.tsx.js"],
+      },
+    );
+
+    return new Response(stream, {
+      headers: { "content-type": "text/html" },
+    });
+  } catch (error) {
+    console.error(error.message || error.toString());
+  }
 }
 
 export { requestHandlerHTTP };

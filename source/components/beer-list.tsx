@@ -26,6 +26,7 @@ function SearchForm(
     maxAbv,
   }: SearchFormProps,
 ) {
+  const beerList = Object.entries(filteredBeerList);
   return (
     <div>
       <form
@@ -46,10 +47,10 @@ function SearchForm(
           value={value}
           list="beer-names"
         />
-        {filteredBeerList.length > 0 && (
+        {beerList.length > 0 && (
           <datalist id="beer-names">
-            {filteredBeerList.map((beer) => (
-              <option key={beer.id} value={beer.name}>
+            {beerList.map(([id, beer]) => (
+              <option key={id} value={beer.name}>
                 (ABV: {beer.abv}%)
               </option>
             ))}
@@ -95,10 +96,12 @@ function SearchForm(
   );
 }
 
-function BeerList({ beers }: { beers: Beer[] }) {
-  const [searchTerm, setSearchTerm] = React.useState("");
+function BeerList({ beers }) {
+  const [allBeers, setAllBeers] = React.useState(beers);
 
-  const [filteredBeerList, setFilteredBeerList] = React.useState(beers);
+  const [filteredBeerList, setFilteredBeerList] = React.useState(allBeers);
+
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   const [minAbv, setMinAbv] = React.useState(0);
   const [maxAbv, setMaxAbv] = React.useState(20);
@@ -125,16 +128,22 @@ function BeerList({ beers }: { beers: Beer[] }) {
   }
 
   React.useEffect(() => {
-    const filteredResults = beers.filter((beer) => {
-      const nameMatch = beer.name.toLowerCase().includes(
+    const filteredData = {};
+
+    for (const [key, value] of Object.entries(allBeers)) {
+      const nameMatch = value.name.toLowerCase().includes(
         searchTerm.toLowerCase(),
       );
-      const abvMatch = (!minAbv || beer.abv >= minAbv) &&
-        (!maxAbv || beer.abv <= maxAbv);
-      return nameMatch && abvMatch;
-    });
 
-    setFilteredBeerList(filteredResults);
+      const abvMatch = (!minAbv || value.abv >= minAbv) &&
+        (!maxAbv || value.abv <= maxAbv);
+
+      if (nameMatch && abvMatch) {
+        filteredData[key] = value;
+      }
+    }
+
+    setFilteredBeerList(filteredData);
   }, [searchTerm, minAbv, maxAbv]);
 
   return (
@@ -150,9 +159,9 @@ function BeerList({ beers }: { beers: Beer[] }) {
         maxAbv={maxAbv}
       />
       <div className="beer-catalog">
-        {filteredBeerList.map((
-          beer: Beer,
-        ) => <BeerOverview key={beer.id} {...beer} />)}
+        {Object.entries(filteredBeerList).map(([id, beer]) => (
+          <BeerOverview key={id} {...beer} />
+        ))}
       </div>
     </React.Fragment>
   );

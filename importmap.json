@@ -2,6 +2,7 @@
   "imports": {
     "#beer-detail": "/js/components/beer-detail.tsx.js",
     "#beer-list": "/js/components/beer-list.tsx.js",
+    "#functions": "/js/functions.ts.js",
     "#types": "/js/types.ts.js",
     "react": "https://ga.jspm.io/npm:react@18.2.0/dev.index.js",
     "react-dom": "https://ga.jspm.io/npm:react-dom@18.2.0/dev.index.js",
