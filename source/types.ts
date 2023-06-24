@@ -61,3 +61,6 @@ export type MashTemp = {
 }
 
 export type Properties = Pick<Beer, "abv" | "ibu" | "target_og" | "target_fg" | "ebc" | "srm" | "ph" | "attenuation_level" | "volume" | "boil_volume" | "method" | "first_brewed" | "description">
+
+
+export type { ImportMap } from 'https://deno.land/x/emit@0.24.0/mod.ts';

@@ -11,7 +11,7 @@
         "react-dom/server": "npm:react-dom/server",
         "#functions": "./source/functions.ts",
         "#home": "./source/home.tsx",
-        "#beer": "./source/beer.tsx",
+        "#beers": "./source/beers.tsx",
         "#beer-detail": "./source/components/beer-detail.tsx",
         "#beer-list": "./source/components/beer-list.tsx",
         "#request-handler": "./source/request-handler.ts",

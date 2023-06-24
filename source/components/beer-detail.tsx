@@ -100,6 +100,8 @@ function BeerOverview({
   description,
   first_brewed,
   abv,
+  ibu,
+  ebc
 }: Beer) {
   return (
     <article key={id} className="beer-overview">
@@ -112,6 +114,8 @@ function BeerOverview({
       <div className="highlight">
         Since <time>{first_brewed}</time>
         <a className="pill" href={`beers?abv=${abv}`}>ABV {abv}</a>
+        <a className="pill" href={`beers?ibu=${ibu}`}>IBU {ibu}</a>
+        <a className="pill" href={`beers?ebc=${ebc}`}>EBC {ebc}</a>
       </div>
     </article>
   );

@@ -30,7 +30,7 @@ function Properties({ abv , ibu , target_og , target_fg , ebc , srm , ph , atten
             scope: "row"
         }, "duration"), /*#__PURE__*/ React.createElement("td", null, duration))))))));
 }
-function BeerOverview({ id , name , tagline , image_url , description , first_brewed , abv  }) {
+function BeerOverview({ id , name , tagline , image_url , description , first_brewed , abv , ibu , ebc  }) {
     return /*#__PURE__*/ React.createElement("article", {
         key: id,
         className: "beer-overview"
@@ -41,7 +41,13 @@ function BeerOverview({ id , name , tagline , image_url , description , first_br
     }, "Since ", /*#__PURE__*/ React.createElement("time", null, first_brewed), /*#__PURE__*/ React.createElement("a", {
         className: "pill",
         href: `beers?abv=${abv}`
-    }, "ABV ", abv)));
+    }, "ABV ", abv), /*#__PURE__*/ React.createElement("a", {
+        className: "pill",
+        href: `beers?ibu=${ibu}`
+    }, "IBU ", ibu), /*#__PURE__*/ React.createElement("a", {
+        className: "pill",
+        href: `beers?ebc=${ebc}`
+    }, "EBC ", ebc)));
 }
 function BeerDetail({ id , name , tagline , image_url , description , first_brewed , abv , ibu , target_og , target_fg , ebc , srm , ph , attenuation_level , volume , boil_volume , method , ingredients , food_pairing , brewers_tips , contributed_by  }) {
     return /*#__PURE__*/ React.createElement("article", {

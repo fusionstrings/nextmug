@@ -11,7 +11,7 @@ async function requestHandler(request: Request) {
         }
 
         if (pathname.startsWith('/beers')) {
-            const { requestHandlerHTTP } = await import('#beer');
+            const { requestHandlerHTTP } = await import('#beers');
             return requestHandlerHTTP(request);
         }
 

@@ -1,10 +1,9 @@
 import * as React from 'react';
-import type { Beer } from "#types";
 import { BeerList } from "#beer-list";
-import { ImportMap } from "https://deno.land/x/emit/mod.ts";
+import type { Beer } from "#types";
 
 function HomePage(
-  { beers, importmap }: { beers: Beer[]; importmap: ImportMap },
+  { beers, importmap }: { beers: Beer[]; importmap: string },
 ) {
   return (
     <html lang="en">
@@ -50,21 +49,14 @@ function HomePage(
       </head>
       <body>
         <header>
-          <h1 className="logo">Next Mug</h1>
-          <nav>
-            <ul>
-              <li>
-                <a href="/beers/random">Random Beer</a>
-              </li>
-            </ul>
-          </nav>
+          <h1 className="logo"><a href="/">Next Mug</a></h1>
         </header>
         <main>
           <div id="home-page">
             <BeerList beers={beers} />
           </div>
         </main>
-        <footer id="root"></footer>
+        <footer></footer>
       </body>
     </html>
   );

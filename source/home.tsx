@@ -13,7 +13,6 @@ async function requestHandlerHTTP() {
     bootstrapModules: ["/js/home-dom.tsx.js"],
   });
   
-  
   return new Response(stream, {
     headers: { "content-type": "text/html" },
   });
