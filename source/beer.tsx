@@ -1,5 +1,7 @@
+import * as React from 'react';
 import { renderToReadableStream } from "react-dom/server";
-import { Beer } from "./components/beer.tsx";
+import { BeerPage } from "./components/beer-page.tsx";
+
 async function requestHandlerHTTP(request: Request) {
   const { pathname } = new URL(request.url);
 
@@ -16,7 +18,7 @@ async function requestHandlerHTTP(request: Request) {
   const data = await fetch(`https://api.punkapi.com/v2/beers/${beer}`);
   const jsonData = await data.json();
   console.log(jsonData);
-  const stream = await renderToReadableStream(<Beer beer={jsonData} />);
+  const stream = await renderToReadableStream(<BeerPage beer={jsonData} />);
 
   return new Response(stream, {
     headers: { "content-type": "text/html" },

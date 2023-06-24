@@ -16,15 +16,15 @@
   --font-size-xxl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
   --font-size-xxxl: clamp(3.05rem, 3.54vw + 2.17rem, 5rem);
   --gap: var(--step-1);
-  --font-family-body: "Satoshi", "Inter", "Jost", sans-serif;
-  --font-family-heading: "Satoshi", "Cabinet Grotesk", "Aboreto", "Inter", "Abel", sans-serif;
-  --font-family-link: "Satoshi", "RX100", sans-serif;
-  --text-color-link: #2e9d10;
-  --primary-background-color: mintcream;
+  --font-family-body: "RX100", sans-serif;
+  --font-family-heading: "Tanker", sans-serif;
+  --font-family-link: "RX100", sans-serif;
+  --text-color-link: red;
+  --primary-background-color: #ffecb3;
   --background-color-body: var(--primary-background-color);
   --background-color-zipvolt-logo: var(--primary-background-color);
   --background-image-body: "../images/background.jpg";
   --primary-text-color: black;
   --text-color-body: var(--primary-text-color);
-  --accent-color: #38E495;
+  --accent-color: gold;
 }

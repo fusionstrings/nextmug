@@ -1,9 +1,14 @@
-import { hydrateRoot } from 'react-dom/client';
-function App(){
-  return <h1>App</h1>
+import * as React from 'react';
+import beers from "https://api.punkapi.com/v2/beers" assert { type: "json" };
+
+import { hydrateRoot } from "react-dom/client";
+import { BeerList } from "#beer-list";
+
+function main() {
+  hydrateRoot(
+    document.getElementById("home-page"),
+    <BeerList beers={beers} />,
+  );
 }
 
-hydrateRoot(
-  document.getElementById('root'),
-  <App />
-);
+main();

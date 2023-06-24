@@ -1,0 +1,18 @@
+{
+    "imports": {
+        "react": "https://jspm.dev/react",
+        "react-dom": "https://jspm.dev/react-dom",
+        "react-dom/client": "https://jspm.dev/react-dom/client",
+        "react-dom/server": "https://jspm.dev/react-dom/server",
+        "#http/server": "https://deno.land/std@0.192.0/http/server.ts",
+        "#http/file_server": "https://deno.land/std@0.192.0/http/file_server.ts",
+        "#functions": "./source/functions.ts",
+        "#home": "./source/home.tsx",
+        "#beer": "./source/beer.tsx",
+        "#beer-detail": "./source/components/beer-detail.tsx",
+        "#beer-list": "./source/components/beer-list.tsx",
+        "#request-handler": "./source/request-handler.ts",
+        "#on-listen": "./source/on-listen.ts",
+        "#types": "./source/types.ts"
+    }
+}
