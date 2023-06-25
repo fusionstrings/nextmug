@@ -26,6 +26,7 @@
     "https://api.punkapi.com/v2/beers?beer_name=Indie%20Pale%20Ale": "e4c8d39441043e9cad62939cb35b710d7347eb5f0f0e1c8323ec740dc77192aa",
     "https://api.punkapi.com/v2/beers?beer_name=Trashy%20Blonde": "be755ec67d566fdf00a2daa0959d96afcda1bbc3b6066c3b4596a43e17c8132a",
     "https://api.punkapi.com/v2/beers?ebc=18&ebc_gt=17.9&ebc_lt=18.1": "91d936c6df6047f4257a4f3409e0fc114d2c698f55d2d3ce16a22c4792f8ed85",
+    "https://api.punkapi.com/v2/beers?http%3A%2F%2Flocalhost%3A8080%2F%3Fpage=2&page=1&per_page=80": "a9facb36e312f71c39b5e8c29ac527e125d3f528a5742791482587d8871a8e5e",
     "https://api.punkapi.com/v2/beers?http%3A%2F%2Flocalhost%3A8080%2F=&page=1&per_page=80": "a9facb36e312f71c39b5e8c29ac527e125d3f528a5742791482587d8871a8e5e",
     "https://api.punkapi.com/v2/beers?ibu=38&ibu_gt=37.9&ibu_lt=38.1": "f5abc19993b3b8e29e85bed1d32cf2a7d59aaf17833a271d8b19ca365f995906",
     "https://api.punkapi.com/v2/beers?ibu=8&ibu_gt=7&ibu_lt=9": "8b3c88c77f0cafd134e40c96130f2280376ef844bee003fff4a4e4da90271f9b",

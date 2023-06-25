@@ -122,6 +122,8 @@ function BeerList({ beers , search  }) {
         page,
         perPage
     ]);
+    const previousPage = page ? parseInt(page, 10) - 1 : 0;
+    const nextPage = page ? parseInt(page, 10) + 1 : 2;
     return /*#__PURE__*/ React.createElement(React.Fragment, null, /*#__PURE__*/ React.createElement(SearchForm, {
         value: searchTerm,
         onSubmit: handleSearchFormSubmit,
@@ -136,6 +138,12 @@ function BeerList({ beers , search  }) {
     }, Object.entries(filteredBeerList).map(([id, beer])=>/*#__PURE__*/ React.createElement(BeerCard, {
             key: id,
             ...beer
-        }))));
+        }))), /*#__PURE__*/ React.createElement("div", {
+        className: "pagination"
+    }, previousPage < 1 ? /*#__PURE__*/ React.createElement("a", {
+        href: `/?page=${previousPage}`
+    }, "Previous") : null, /*#__PURE__*/ React.createElement("a", {
+        href: `/?page=${nextPage}`
+    }, "Next")));
 }
 export { BeerList };

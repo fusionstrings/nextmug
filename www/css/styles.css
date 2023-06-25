@@ -335,7 +335,7 @@ p {
     margin-right: 5px;
 }
 
-.hops > div{
+.hops>div {
     margin: var(--step-1) 0;
     border-bottom: 2px solid;
 }
@@ -346,4 +346,9 @@ p {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: var(--step-1);
     }
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
 }

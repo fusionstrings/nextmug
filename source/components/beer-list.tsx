@@ -102,7 +102,7 @@ type Props = { beers: { number: Beer }; search: string };
 
 function BeerList({ beers, search }: Props) {
   const searchParams = new URLSearchParams(search);
-  
+
   const [allBeers, setAllBeers] = React.useState(beers);
 
   const [filteredBeerList, setFilteredBeerList] = React.useState(allBeers);
@@ -156,11 +156,14 @@ function BeerList({ beers, search }: Props) {
   }, [allBeers, searchTerm, minAbv, maxAbv]);
 
   React.useEffect(() => {
-    const nextPage = parseInt(page, 10) + 1
+    const nextPage = parseInt(page, 10) + 1;
     api(`page=${nextPage}&per_page=${perPage}`).then((data) => {
       setAllBeers({ ...allBeers, ...data.beers });
     });
   }, [page, perPage]);
+
+  const previousPage = page ? parseInt(page, 10) - 1 : 0;
+  const nextPage = page ? parseInt(page, 10) + 1 : 2;
 
   return (
     <React.Fragment>
@@ -178,6 +181,10 @@ function BeerList({ beers, search }: Props) {
         {Object.entries(filteredBeerList).map(([id, beer]) => (
           <BeerCard key={id} {...beer} />
         ))}
+      </div>
+      <div className="pagination">
+        {previousPage < 1 ? <a href={`/?page=${previousPage}`}>Previous</a> : null}
+        <a href={`/?page=${nextPage}`}>Next</a>
       </div>
     </React.Fragment>
   );
