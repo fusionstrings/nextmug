@@ -8,11 +8,11 @@ import { api } from "#functions";
 
 async function main() {
   try {
-    const beers = await api(globalThis.location.href);
+    const { beers, search } = await api(import.meta.url);
 
     hydrateRoot(
       document.getElementById("home-page"),
-      <BeerList beers={beers} />,
+      <BeerList beers={beers} search={search} />,
     );
   } catch (error) {
     console.error(error.message || error.toString());

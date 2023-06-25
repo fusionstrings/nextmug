@@ -1,5 +1,6 @@
 import * as React from "react";
 import { BeerCard } from "#beer-detail";
+import { api } from "#functions";
 function SearchForm({ onSubmit , onInput , value , filteredBeerList , handleMinAbvChange , handleMaxAbvChange , minAbv , maxAbv  }) {
     const beerList = Object.entries(filteredBeerList);
     return /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("form", {
@@ -65,12 +66,18 @@ function SearchForm({ onSubmit , onInput , value , filteredBeerList , handleMinA
         href: "/beers/random"
     }, "Random Beer"))));
 }
-function BeerList({ beers  }) {
+function BeerList({ beers , search  }) {
+    const searchParams = new URLSearchParams(search);
     const [allBeers, setAllBeers] = React.useState(beers);
     const [filteredBeerList, setFilteredBeerList] = React.useState(allBeers);
     const [searchTerm, setSearchTerm] = React.useState("");
     const [minAbv, setMinAbv] = React.useState(0);
     const [maxAbv, setMaxAbv] = React.useState(20);
+    const [page, setPage] = React.useState(searchParams.get("page"));
+    const [perPage, setPerPage] = React.useState(searchParams.get("per_page"));
+    const [pageLoaded, setPageLoaded] = React.useState([
+        page
+    ]);
     function handleSearchInput(event) {
         event.preventDefault();
         const { value  } = event?.currentTarget;
@@ -90,6 +97,7 @@ function BeerList({ beers  }) {
     React.useEffect(()=>{
         const filteredData = {};
         for (const [key, value] of Object.entries(allBeers)){
+            console.log(`key: ${key}: value: ${value}`);
             const nameMatch = value.name.toLowerCase().includes(searchTerm.toLowerCase());
             const abvMatch = (!minAbv || value.abv >= minAbv) && (!maxAbv || value.abv <= maxAbv);
             if (nameMatch && abvMatch) {
@@ -102,6 +110,18 @@ function BeerList({ beers  }) {
         searchTerm,
         minAbv,
         maxAbv
+    ]);
+    React.useEffect(()=>{
+        api(`page=${parseInt(page, 10) + 1}&per_page=${perPage}`).then((data)=>{
+            console.log(data);
+            setAllBeers({
+                ...allBeers,
+                ...data.beers
+            });
+        });
+    }, [
+        page,
+        perPage
     ]);
     return /*#__PURE__*/ React.createElement(React.Fragment, null, /*#__PURE__*/ React.createElement(SearchForm, {
         value: searchTerm,

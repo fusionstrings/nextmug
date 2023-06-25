@@ -1,6 +1,8 @@
 import * as React from "react";
 import { BeerCard } from "#beer-detail";
 
+import { api } from "#functions";
+
 import type { Beer } from "#types";
 
 type SearchFormProps = {
@@ -96,9 +98,11 @@ function SearchForm(
   );
 }
 
-type Props = { beers: { number: Beer } };
+type Props = { beers: { number: Beer }; search: string };
 
-function BeerList({ beers }: Props) {
+function BeerList({ beers, search }: Props) {
+  const searchParams = new URLSearchParams(search);
+  
   const [allBeers, setAllBeers] = React.useState(beers);
 
   const [filteredBeerList, setFilteredBeerList] = React.useState(allBeers);
@@ -107,6 +111,9 @@ function BeerList({ beers }: Props) {
 
   const [minAbv, setMinAbv] = React.useState(0);
   const [maxAbv, setMaxAbv] = React.useState(20);
+  const [page, setPage] = React.useState(searchParams.get("page"));
+  const [perPage, setPerPage] = React.useState(searchParams.get("per_page"));
+  const [pageLoaded, setPageLoaded] = React.useState([page]);
 
   function handleSearchInput(event: React.FormEvent<HTMLInputElement>) {
     event.preventDefault();
@@ -133,6 +140,7 @@ function BeerList({ beers }: Props) {
     const filteredData = {};
 
     for (const [key, value] of Object.entries(allBeers)) {
+      console.log(`key: ${key}: value: ${value}`)
       const nameMatch = value.name.toLowerCase().includes(
         searchTerm.toLowerCase(),
       );
@@ -147,6 +155,14 @@ function BeerList({ beers }: Props) {
 
     setFilteredBeerList(filteredData);
   }, [allBeers, searchTerm, minAbv, maxAbv]);
+
+  React.useEffect(() => {
+    const nextPage = parseInt(page, 10) + 1
+    api(`page=${nextPage}&per_page=${perPage}`).then((data) => {
+      console.log(data);
+      setAllBeers({ ...allBeers, ...data.beers });
+    });
+  }, [page, perPage]);
 
   return (
     <React.Fragment>

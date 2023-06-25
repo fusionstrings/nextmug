@@ -5,28 +5,14 @@ import { api } from "#functions";
 
 async function requestHandlerHTTP(request: Request) {
   try {
-    const beers = await api(request.url);
+    const { beers, search } = await api(request.url);
 
     const importmap = await Deno.readTextFile(`${Deno.cwd()}/importmap.json`);
-
-    const { searchParams } = new URL(request.url);
-
-    const page = searchParams.get("page") || "";
-
-    if (!page) {
-      searchParams.append("page", "1");
-    }
-
-    const perPage = searchParams.get("per_page") || "";
-
-    if (!perPage) {
-      searchParams.append("per_page", "80");
-    }
 
     const stream = await renderToReadableStream(
       <HomePage importmap={importmap} beers={beers} />,
       {
-        bootstrapModules: [`/js/home-dom.tsx.js?${searchParams.toString()}`],
+        bootstrapModules: [`/js/home-dom.tsx.js?${search}`],
       },
     );
 

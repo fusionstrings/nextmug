@@ -17,9 +17,9 @@ function removeSlashes(pathname: URL['pathname']) {
     return removeTrailingSlash(removeLeadingSlash(pathname));
 }
 
-async function api(url: URL['href']) {
+async function api(queryString: string) {
     try {
-        const { searchParams } = new URL(url);
+        const searchParams = new URLSearchParams(queryString);
 
         const page = searchParams.get("page") || "";
 
@@ -51,26 +51,20 @@ async function api(url: URL['href']) {
             searchParams.append("ebc_gt", Number.parseFloat(searchTermEBC) - 1);
             searchParams.append("ebc_lt", Number.parseFloat(searchTermEBC) + 1);
         }
-
+        const search = searchParams.toString();
         const beerData = await import(
-            `https://api.punkapi.com/v2/beers?${searchParams.toString()}`,
+            `https://api.punkapi.com/v2/beers?${search}`,
             {
                 assert: { type: "json" },
             }
         );
-        console.log(beerData)
-
-        //const beers = beerData.default;
-
-        // const beers = await import("https://api.punkapi.com/v2/beers", {
-        //   assert: { type: "json" },
-        // });
 
         const beers = {};
         beerData.default.forEach((beer) => {
             beers[beer.id] = beer;
         });
-        return beers;
+
+        return { beers, search };
     } catch (error) {
         console.error(error.message || error.toString());
     }

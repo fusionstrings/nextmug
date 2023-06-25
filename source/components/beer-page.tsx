@@ -7,8 +7,7 @@ function BeerPage(
   { beers, importmap, detail }: { beers: Beer[]; importmap: string, detail?: boolean },
 ) {
   const beer = beers[0];
-  console.log(beer);
-  console.log(detail)
+  
   return (
     <html lang="en">
       <head>
