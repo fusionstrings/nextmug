@@ -16,11 +16,12 @@
         "#beer-list": "./source/components/beer-list.tsx",
         "#request-handler": "./source/request-handler.ts",
         "#on-listen": "./source/on-listen.ts",
+        "#transpile": "./source/transpile.ts",
         "#types": "./source/types.ts"
     },
     "tasks": {
-        "start": "deno run --allow-net --allow-read --allow-env server.ts",
-        "dev": "deno run --allow-net --allow-read --allow-env --watch server.ts",
+        "start": "deno run --allow-net --allow-read --allow-env --allow-write server.ts",
+        "dev": "deno run --allow-net --allow-read --allow-env  --allow-write --watch server.ts",
         "transpile": "deno run -A transpile.ts"
     },
     "compilerOptions": {

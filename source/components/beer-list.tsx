@@ -1,6 +1,5 @@
 import * as React from "react";
 import { BeerCard } from "#beer-detail";
-
 import { api } from "#functions";
 
 import type { Beer } from "#types";
