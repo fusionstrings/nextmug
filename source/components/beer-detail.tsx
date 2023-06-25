@@ -1,7 +1,7 @@
-import * as React from 'react';
-import type { Beer, Properties } from "#types";
+import * as React from "react";
+import type { Beer, SpecProps } from "#types";
 
-function Properties({
+function SpecTable({
   abv,
   ibu,
   target_og,
@@ -15,12 +15,10 @@ function Properties({
   method,
   first_brewed,
   description,
-}: Properties) {
+}: SpecProps) {
   return (
-    <React.Fragment>
-      <time>{first_brewed}</time>
-      <p>{description}</p>
-      <table>
+    <table className="spec-table">
+      <tbody>
         <tr>
           <th scope="row">Alcohol By Volume (ABV)</th>
           <td>{abv}</td>
@@ -74,6 +72,8 @@ function Properties({
               <table key={`${temp}-${duration}-${index}`}>
                 <tr>
                   <th scope="row">Temprature</th>
+                </tr>
+                <tr>
                   <td>
                     <strong>{temp.value}</strong>
                     <span>{temp.unit}</span>
@@ -81,18 +81,20 @@ function Properties({
                 </tr>
                 <tr>
                   <th scope="row">duration</th>
+                </tr>
+                <tr>
                   <td>{duration}</td>
                 </tr>
               </table>
             ))}
           </td>
         </tr>
-      </table>
-    </React.Fragment>
+      </tbody>
+    </table>
   );
 }
 
-function BeerOverview({
+function BeerCard({
   id,
   name,
   tagline,
@@ -100,18 +102,23 @@ function BeerOverview({
   description,
   first_brewed,
   abv,
+  ibu,
+  ebc,
 }: Beer) {
   return (
-    <article key={id} className="beer-overview">
-      <h3>{name}</h3>
-      <figure>
-        <img src={image_url} />
-      </figure>
-      <p>{tagline}</p>
-
+    <article key={id} className="beer-card">
+      <a href={`/beers/${id}`}>
+        <h3>{name}</h3>
+        <figure>
+          <img src={image_url} />
+        </figure>
+        <p>{tagline}</p>
+      </a>
       <div className="highlight">
         Since <time>{first_brewed}</time>
-        <a className="pill" href={`beers?abv=${abv}`}>ABV {abv}</a>
+        <a className="pill" href={`/?abv=${abv}`}>ABV {abv}</a>
+        <a className="pill" href={`/?ibu=${ibu}`}>IBU {ibu}</a>
+        <a className="pill" href={`/?ebc=${ebc}`}>EBC {ebc}</a>
       </div>
     </article>
   );
@@ -141,13 +148,18 @@ function BeerDetail({
   contributed_by,
 }: Beer) {
   return (
-    <article key={id}>
-      <h2>{name}</h2>
-      <h3>{tagline}</h3>
-      <time>{first_brewed}</time>
-      <img src={image_url} />
-      <p>{description}</p>
-      <Properties
+    <article key={id} className="beer-detail">
+      <div className="hero">
+        <div>
+          <h2>{name}</h2>
+          <h3>{tagline}</h3>
+          <time>Brewing since {first_brewed}</time>
+          <p>{description}</p>
+        </div>
+        <img src={image_url} />
+      </div>
+
+      <SpecTable
         abv={abv}
         ibu={ibu}
         target_og={target_og}
@@ -162,52 +174,65 @@ function BeerDetail({
         first_brewed={first_brewed}
         description={description}
       />
-
       <div>
-        <h4>Ingredients</h4>
-        <h5>Malts</h5>
-        {ingredients?.malt.map(({ name, amount }, index) => (
-          <p key={`${name}-${amount}-${index}`}>
-            <strong>{name}</strong>
-            <strong>{amount.value}</strong>
-            <span>{amount.unit}</span>
+        <div>
+          <h4>Ingredients</h4>
+          <div>
+            <h5>Malts</h5>
+            {ingredients?.malt.map(({ name, amount }, index) => (
+              <p key={`${name}-${amount}-${index}`}>
+                <strong>{name}</strong>
+                <span>{amount.value} {amount.unit}</span>
+              </p>
+            ))}
+          </div>
+          <div>
+            <h5>Hops</h5>
+            <div className="hops">
+              {ingredients?.hops.map((
+                { name, amount, add, attribute },
+                index,
+              ) => (
+                <div key={`${name}-${amount}-${index}`}>
+                  <div>
+                    <p>
+                      <strong>{name}</strong>
+                      <span>{amount.value} {amount.unit}</span>
+                    </p>
+                  </div>
+                  <div>
+                    <p>Add: {add}</p>
+                    <p>Attribute: {attribute}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h5>Yeast</h5>
+            <p>{ingredients.yeast}</p>
+          </div>
+        </div>
+        <div>
+          <h4>Food Pairing</h4>
+          <p>
+            {food_pairing.map((food, index) => (
+              <span key={`${food}-${index}`}>{food}</span>
+            ))}
           </p>
-        ))}
+        </div>
+        <div>
+          <h4>Brewers Tips</h4>
+          <p>{brewers_tips}</p>
+        </div>
 
-        <h5>Hops</h5>
-        {ingredients?.hops.map(({ name, amount, add, attribute }, index) => (
-          <React.Fragment key={`${name}-${amount}-${index}`}>
-            <p>
-              <strong>{name}</strong>
-              <strong>{amount.value}</strong>
-              <span>{amount.unit}</span>
-            </p>
-            <p>Add: {add}</p>
-            <p>Attribute: {attribute}</p>
-          </React.Fragment>
-        ))}
-        <h5>Yeast</h5>
-        <p>{ingredients.yeast}</p>
-      </div>
-      <div>
-        <h4>Food Pairing</h4>
-        <p>
-          {food_pairing.map((food, index) => (
-            <span key={`${food}-${index}`}>{food}</span>
-          ))}
-        </p>
-      </div>
-      <div>
-        <h4>Brewers Tips</h4>
-        <p>{brewers_tips}</p>
-      </div>
-
-      <div>
-        <h4>Contributed by</h4>
-        <p>{contributed_by}</p>
+        <div>
+          <h4>Contributed by</h4>
+          <p>{contributed_by}</p>
+        </div>
       </div>
     </article>
   );
 }
 
-export { BeerDetail, BeerOverview };
+export { BeerCard, BeerDetail };
