@@ -186,7 +186,7 @@ function BeerList({ beers, search }: Props) {
       //setPageLoaded([...pageLoaded, page]); // Mark the current page as loaded
     });
 
-    window.history.replaceState({}, "", `/?${queryString}`);
+    //window.history.replaceState({}, "", `/?${queryString}`);
   }, [page, perPage, downloadedBeers, minAbv, maxAbv]);
 
   const previousPage = page ? parseInt(page, 10) - 1 : 0;

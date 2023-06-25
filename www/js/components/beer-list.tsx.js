@@ -133,7 +133,7 @@ function BeerList({ beers , search  }) {
                 }));
         //setPageLoaded([...pageLoaded, page]); // Mark the current page as loaded
         });
-        window.history.replaceState({}, "", `/?${queryString}`);
+    //window.history.replaceState({}, "", `/?${queryString}`);
     }, [
         page,
         perPage,

@@ -1,51 +1,7 @@
 {
   "version": "2",
   "remote": {
-    "https://api.punkapi.com/v2/beers": "7b99394027d4f7b861545d227eff4b72ac7f53ba5f87f52e564819cd952213b7",
-    "https://api.punkapi.com/v2/beers/1": "32a9f6ea59fba46d34c0f9647e0fd86662562ceb70f384240b306b9760973c3c",
-    "https://api.punkapi.com/v2/beers/111": "0b57ec122305134aa851092e11d50bf21272c1c716523cb8f87db24bbf8463ea",
-    "https://api.punkapi.com/v2/beers/123": "f296fe0d375f775c582fe60324045c4419b8e66b05f47e638487e9bea066de87",
-    "https://api.punkapi.com/v2/beers/2": "be755ec67d566fdf00a2daa0959d96afcda1bbc3b6066c3b4596a43e17c8132a",
-    "https://api.punkapi.com/v2/beers/23": "8e2b309e37f18b4eda8c1680806bcd5a6fa6dc32fa90a95faace15fa1a0a0c59",
-    "https://api.punkapi.com/v2/beers/300": "e4c8d39441043e9cad62939cb35b710d7347eb5f0f0e1c8323ec740dc77192aa",
-    "https://api.punkapi.com/v2/beers/4": "b0837b81454b29f2ffd27878957358323782d1ae13e079572f8dfd5f55415ef3",
-    "https://api.punkapi.com/v2/beers/43": "e40b1a1c5701ef98db9f1e353cd3d51e6078253fb04d3c5237fa05384f7d6b51",
-    "https://api.punkapi.com/v2/beers/5": "618b63055f639aace44601f94bde6c72f30d540aa29fb21266864f989cc1abb9",
-    "https://api.punkapi.com/v2/beers/random": "f296fe0d375f775c582fe60324045c4419b8e66b05f47e638487e9bea066de87",
-    "https://api.punkapi.com/v2/beers?abv=3&x=y&abv_gt=2.9&abv_lt=3.1": "117ec43e7d0fe22519bd9d48df54e1eeddc9cfe50ed741af036bd209baa6b51b",
-    "https://api.punkapi.com/v2/beers?abv=3.1&x=y&abv_gt=3&abv_lt=3.2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-    "https://api.punkapi.com/v2/beers?abv=4&abv_gt=3.9&abv_lt=4.1": "fb635d2a364b3f9d2a496f4286e22bd6c960f665367eb19e6f6c913b4c5756a2",
-    "https://api.punkapi.com/v2/beers?abv=4.1&abv_gt=3.9999999999999996&abv_lt=4.199999999999999": "f8729352750959467e8d1e25ead35dab2efe3f47cedb241ef3e2bec7dc800b6f",
-    "https://api.punkapi.com/v2/beers?abv=4.5&abv_gt=4.4&abv_lt=4.6": "d128e963c385d23dfc71b6756ed41301886e05db4576989232f07bd07c9bca1d",
-    "https://api.punkapi.com/v2/beers?abv=4.5&x=y&abv_gt=4.4&abv_lt=4.6": "d128e963c385d23dfc71b6756ed41301886e05db4576989232f07bd07c9bca1d",
-    "https://api.punkapi.com/v2/beers?abv=4.9&x=y&abv_gt=4.800000000000001&abv_lt=5": "16058e446f5708052ff7305fc842914e2e7773157c3cf7c262cb64d7dd5d5911",
-    "https://api.punkapi.com/v2/beers?abv=5": "7b99394027d4f7b861545d227eff4b72ac7f53ba5f87f52e564819cd952213b7",
-    "https://api.punkapi.com/v2/beers?abv=8.2&abv_gt=8.1&abv_lt=8.299999999999999": "56dd7a420e6d34c943ff3aa6b6f1e0c697f8531a05c70e19d04afe67fa30cafc",
-    "https://api.punkapi.com/v2/beers?abv_gt=5": "4a8c15a4ca44f147294c35ed364dda39f835dcb7df1e3a52b38111edab1c3c31",
-    "https://api.punkapi.com/v2/beers?abv_gt=5&ids=12|13": "2d9304d3b745c79521df075e416325bccf8040541b4cedfd1b5afb801da6eaaa",
-    "https://api.punkapi.com/v2/beers?abv_gt=5&ids=12|13&abv=3.1": "2d9304d3b745c79521df075e416325bccf8040541b4cedfd1b5afb801da6eaaa",
-    "https://api.punkapi.com/v2/beers?beer_name=Indie%20Pale%20Ale": "e4c8d39441043e9cad62939cb35b710d7347eb5f0f0e1c8323ec740dc77192aa",
-    "https://api.punkapi.com/v2/beers?beer_name=Trashy%20Blonde": "be755ec67d566fdf00a2daa0959d96afcda1bbc3b6066c3b4596a43e17c8132a",
-    "https://api.punkapi.com/v2/beers?ebc=18&ebc_gt=17.9&ebc_lt=18.1": "91d936c6df6047f4257a4f3409e0fc114d2c698f55d2d3ce16a22c4792f8ed85",
-    "https://api.punkapi.com/v2/beers?http%3A%2F%2Flocalhost%3A8080%2F%3Fpage=2&page=1&per_page=80": "a9facb36e312f71c39b5e8c29ac527e125d3f528a5742791482587d8871a8e5e",
-    "https://api.punkapi.com/v2/beers?http%3A%2F%2Flocalhost%3A8080%2F=&page=1&per_page=80": "a9facb36e312f71c39b5e8c29ac527e125d3f528a5742791482587d8871a8e5e",
-    "https://api.punkapi.com/v2/beers?ibu=38&ibu_gt=37.9&ibu_lt=38.1": "f5abc19993b3b8e29e85bed1d32cf2a7d59aaf17833a271d8b19ca365f995906",
-    "https://api.punkapi.com/v2/beers?ibu=8&ibu_gt=7&ibu_lt=9": "8b3c88c77f0cafd134e40c96130f2280376ef844bee003fff4a4e4da90271f9b",
-    "https://api.punkapi.com/v2/beers?ibu_gt=5": "8e562dc6d19c597b6db201cdf1982b0228451459e7420ed5d95a0f4542b9b178",
     "https://api.punkapi.com/v2/beers?page=1&per_page=25": "7b99394027d4f7b861545d227eff4b72ac7f53ba5f87f52e564819cd952213b7",
-    "https://api.punkapi.com/v2/beers?page=1&per_page=25&abv_lt=20&abv_gt=0": "8e562dc6d19c597b6db201cdf1982b0228451459e7420ed5d95a0f4542b9b178",
-    "https://api.punkapi.com/v2/beers?page=1&per_page=25&abv_lt=3.4&abv_gt=11": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-    "https://api.punkapi.com/v2/beers?page=1&per_page=80": "a9facb36e312f71c39b5e8c29ac527e125d3f528a5742791482587d8871a8e5e",
-    "https://api.punkapi.com/v2/beers?page=2&per_page=25&abv_lt=0&abv_gt=20": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-    "https://api.punkapi.com/v2/beers?page=2&per_page=50": "6061709a3a5be2196ed49a64154eee40dfb4f30329e882676ba793ca32e5d722",
-    "https://api.punkapi.com/v2/beers?page=2&per_page=80": "c027a1118b452e6272b095ad084cffb264620c129ea9232389edc3024203c9e1",
-    "https://api.punkapi.com/v2/beers?page=3&per_page=25": "2027e928ea3ddee63542bc914c0b1836581fa638ce9550d21c06c0402a6b83c4",
-    "https://api.punkapi.com/v2/beers?page=3&per_page=80": "64e2c989c3c832058f2587e10a7ae210b23fe5395732e3469ce5a2019cbc66fe",
-    "https://api.punkapi.com/v2/beers?page=4&per_page=80": "584a80d738cb5f0dd4cafe0206124305f97530f2307a3e08493bc5570ea20469",
-    "https://api.punkapi.com/v2/beers?page=5&per_page=80": "bc85e9050bb0816362a385139f481784c85a7377427eb4580239b701280e4e1c",
-    "https://api.punkapi.com/v2/beers?page=6&per_page=80": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-    "https://api.punkapi.com/v2/beers?per_page=50&page=1": "4a6a2d59b364a29a9b4631f1a63efa6fece3d4f440dda9ded491810086d023df",
-    "https://api.punkapi.com/v2/beers?per_page=80&page=1": "a9facb36e312f71c39b5e8c29ac527e125d3f528a5742791482587d8871a8e5e",
     "https://deno.land/std@0.140.0/_util/assert.ts": "e94f2eb37cebd7f199952e242c77654e43333c1ac4c5c700e929ea3aa5489f74",
     "https://deno.land/std@0.140.0/_util/os.ts": "3b4c6e27febd119d36a416d7a97bd3b0251b77c88942c8f16ee5953ea13e2e49",
     "https://deno.land/std@0.140.0/bytes/bytes_list.ts": "67eb118e0b7891d2f389dad4add35856f4ad5faab46318ff99653456c23b025d",
@@ -153,43 +109,10 @@
   },
   "npm": {
     "specifiers": {
-      "@types/react": "@types/react@18.2.13",
-      "@types/react-dom": "@types/react-dom@18.2.6",
       "react": "react@18.2.0",
-      "react-dom": "react-dom@18.2.0_react@18.2.0",
-      "rollup": "rollup@3.25.1"
+      "react-dom": "react-dom@18.2.0_react@18.2.0"
     },
     "packages": {
-      "@types/prop-types@15.7.5": {
-        "integrity": "sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==",
-        "dependencies": {}
-      },
-      "@types/react-dom@18.2.6": {
-        "integrity": "sha512-2et4PDvg6PVCyS7fuTc4gPoksV58bW0RwSxWKcPRcHZf0PRUGq03TKcD/rUHe3azfV6/5/biUBJw+HhCQjaP0A==",
-        "dependencies": {
-          "@types/react": "@types/react@18.2.13"
-        }
-      },
-      "@types/react@18.2.13": {
-        "integrity": "sha512-vJ+zElvi/Zn9cVXB5slX2xL8PZodPCwPRDpittQdw43JR2AJ5k3vKdgJJyneV/cYgIbLQUwXa9JVDvUZXGba+Q==",
-        "dependencies": {
-          "@types/prop-types": "@types/prop-types@15.7.5",
-          "@types/scheduler": "@types/scheduler@0.16.3",
-          "csstype": "csstype@3.1.1"
-        }
-      },
-      "@types/scheduler@0.16.3": {
-        "integrity": "sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==",
-        "dependencies": {}
-      },
-      "csstype@3.1.1": {
-        "integrity": "sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==",
-        "dependencies": {}
-      },
-      "fsevents@2.3.2": {
-        "integrity": "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==",
-        "dependencies": {}
-      },
       "js-tokens@4.0.0": {
         "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
         "dependencies": {}
@@ -212,12 +135,6 @@
         "integrity": "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==",
         "dependencies": {
           "loose-envify": "loose-envify@1.4.0"
-        }
-      },
-      "rollup@3.25.1": {
-        "integrity": "sha512-tywOR+rwIt5m2ZAWSe5AIJcTat8vGlnPFAv15ycCrw33t6iFsXZ6mzHVFh2psSjxQPmI+xgzMZZizUAukBI4aQ==",
-        "dependencies": {
-          "fsevents": "fsevents@2.3.2"
         }
       },
       "scheduler@0.23.0": {
