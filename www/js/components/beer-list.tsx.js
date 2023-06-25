@@ -97,7 +97,6 @@ function BeerList({ beers , search  }) {
     React.useEffect(()=>{
         const filteredData = {};
         for (const [key, value] of Object.entries(allBeers)){
-            console.log(`key: ${key}: value: ${value}`);
             const nameMatch = value.name.toLowerCase().includes(searchTerm.toLowerCase());
             const abvMatch = (!minAbv || value.abv >= minAbv) && (!maxAbv || value.abv <= maxAbv);
             if (nameMatch && abvMatch) {
@@ -112,8 +111,8 @@ function BeerList({ beers , search  }) {
         maxAbv
     ]);
     React.useEffect(()=>{
-        api(`page=${parseInt(page, 10) + 1}&per_page=${perPage}`).then((data)=>{
-            console.log(data);
+        const nextPage = parseInt(page, 10) + 1;
+        api(`page=${nextPage}&per_page=${perPage}`).then((data)=>{
             setAllBeers({
                 ...allBeers,
                 ...data.beers

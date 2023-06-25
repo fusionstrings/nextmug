@@ -140,7 +140,6 @@ function BeerList({ beers, search }: Props) {
     const filteredData = {};
 
     for (const [key, value] of Object.entries(allBeers)) {
-      console.log(`key: ${key}: value: ${value}`)
       const nameMatch = value.name.toLowerCase().includes(
         searchTerm.toLowerCase(),
       );
@@ -159,7 +158,6 @@ function BeerList({ beers, search }: Props) {
   React.useEffect(() => {
     const nextPage = parseInt(page, 10) + 1
     api(`page=${nextPage}&per_page=${perPage}`).then((data) => {
-      console.log(data);
       setAllBeers({ ...allBeers, ...data.beers });
     });
   }, [page, perPage]);
