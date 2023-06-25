@@ -5,7 +5,8 @@ import { BeerList } from "#beer-list";
 import { api } from "#functions";
 async function main() {
     try {
-        const { beers , search  } = await api(import.meta.url);
+        const url = new URL(import.meta.url);
+        const { beers , search  } = await api(url.search);
         hydrateRoot(document.getElementById("home-page"), /*#__PURE__*/ React.createElement(BeerList, {
             beers: beers,
             search: search

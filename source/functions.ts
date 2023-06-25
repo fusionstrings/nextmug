@@ -19,10 +19,12 @@ function removeSlashes(pathname: URL['pathname']) {
 
 async function api(queryString: string) {
     try {
+
+        console.log(queryString)
         const searchParams = new URLSearchParams(queryString);
-
+        console.log(searchParams.toString())
         const page = searchParams.get("page") || "";
-
+        console.log('dd', searchParams.get("page") )
         if (!page) {
             searchParams.append("page", "1");
         }
@@ -52,6 +54,7 @@ async function api(queryString: string) {
             searchParams.append("ebc_lt", Number.parseFloat(searchTermEBC) + 1);
         }
         const search = searchParams.toString();
+        console.log(search)
         const beerData = await import(
             `https://api.punkapi.com/v2/beers?${search}`,
             {
@@ -60,6 +63,7 @@ async function api(queryString: string) {
         );
 
         const beers = {};
+        //console.log(beerData.de)
         beerData.default.forEach((beer) => {
             beers[beer.id] = beer;
         });

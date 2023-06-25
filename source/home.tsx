@@ -5,7 +5,8 @@ import { api } from "#functions";
 
 async function requestHandlerHTTP(request: Request) {
   try {
-    const { beers, search } = await api(request.url);
+    const url = new URL(request.url);
+    const { beers, search } = await api(url.search);
 
     const importmap = await Deno.readTextFile(`${Deno.cwd()}/importmap.json`);
 

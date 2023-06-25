@@ -1,6 +1,5 @@
 import * as React from "react";
 import { BeerCard } from "#beer-detail";
-import { api } from "#functions";
 function SearchForm({ onSubmit , onInput , value , filteredBeerList , handleMinAbvChange , handleMaxAbvChange , minAbv , maxAbv  }) {
     const beerList = Object.entries(filteredBeerList);
     return /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("form", {
@@ -110,18 +109,12 @@ function BeerList({ beers , search  }) {
         minAbv,
         maxAbv
     ]);
-    React.useEffect(()=>{
-        const nextPage = parseInt(page, 10) + 1;
-        api(`page=${nextPage}&per_page=${perPage}`).then((data)=>{
-            setAllBeers({
-                ...allBeers,
-                ...data.beers
-            });
-        });
-    }, [
-        page,
-        perPage
-    ]);
+    // React.useEffect(() => {
+    //   const nextPage = parseInt(page, 10) + 1;
+    //   api(`page=${nextPage}&per_page=${perPage}`).then((data) => {
+    //     setAllBeers({ ...allBeers, ...data.beers });
+    //   });
+    // }, [page, perPage]);
     const previousPage = page ? parseInt(page, 10) - 1 : 0;
     const nextPage = page ? parseInt(page, 10) + 1 : 2;
     return /*#__PURE__*/ React.createElement(React.Fragment, null, /*#__PURE__*/ React.createElement(SearchForm, {
@@ -142,7 +135,7 @@ function BeerList({ beers , search  }) {
         className: "pagination"
     }, previousPage < 1 ? /*#__PURE__*/ React.createElement("a", {
         href: `/?page=${previousPage}`
-    }, "Previous") : null, /*#__PURE__*/ React.createElement("a", {
+    }, "Previous") : /*#__PURE__*/ React.createElement("span", null), /*#__PURE__*/ React.createElement("a", {
         href: `/?page=${nextPage}`
     }, "Next")));
 }

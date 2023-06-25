@@ -155,12 +155,12 @@ function BeerList({ beers, search }: Props) {
     setFilteredBeerList(filteredData);
   }, [allBeers, searchTerm, minAbv, maxAbv]);
 
-  React.useEffect(() => {
-    const nextPage = parseInt(page, 10) + 1;
-    api(`page=${nextPage}&per_page=${perPage}`).then((data) => {
-      setAllBeers({ ...allBeers, ...data.beers });
-    });
-  }, [page, perPage]);
+  // React.useEffect(() => {
+  //   const nextPage = parseInt(page, 10) + 1;
+  //   api(`page=${nextPage}&per_page=${perPage}`).then((data) => {
+  //     setAllBeers({ ...allBeers, ...data.beers });
+  //   });
+  // }, [page, perPage]);
 
   const previousPage = page ? parseInt(page, 10) - 1 : 0;
   const nextPage = page ? parseInt(page, 10) + 1 : 2;
@@ -183,7 +183,9 @@ function BeerList({ beers, search }: Props) {
         ))}
       </div>
       <div className="pagination">
-        {previousPage < 1 ? <a href={`/?page=${previousPage}`}>Previous</a> : null}
+        {previousPage < 1
+          ? <a href={`/?page=${previousPage}`}>Previous</a>
+          : <span />}
         <a href={`/?page=${nextPage}`}>Next</a>
       </div>
     </React.Fragment>
