@@ -98,9 +98,9 @@ function SearchForm(
   );
 }
 
-type Props = { beers: { number: Beer }; };
+type Props = { beers: { number: Beer }; search: string };
 
-function BeerList({ beers }: Props) {
+function BeerList({ beers, search }: Props) {
   const searchParams = new URLSearchParams(search);
   
   const [allBeers, setAllBeers] = React.useState(beers);

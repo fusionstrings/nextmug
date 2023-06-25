@@ -66,7 +66,7 @@ function SearchForm({ onSubmit , onInput , value , filteredBeerList , handleMinA
         href: "/beers/random"
     }, "Random Beer"))));
 }
-function BeerList({ beers  }) {
+function BeerList({ beers , search  }) {
     const searchParams = new URLSearchParams(search);
     const [allBeers, setAllBeers] = React.useState(beers);
     const [filteredBeerList, setFilteredBeerList] = React.useState(allBeers);
