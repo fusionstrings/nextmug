@@ -2,7 +2,7 @@ import * as React from "react";
 function SpecTable({ abv , ibu , target_og , target_fg , ebc , srm , ph , attenuation_level , volume , boil_volume , method , first_brewed , description  }) {
     return /*#__PURE__*/ React.createElement("table", {
         className: "spec-table"
-    }, /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("th", {
+    }, /*#__PURE__*/ React.createElement("tbody", null, /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("th", {
         scope: "row"
     }, "Alcohol By Volume (ABV)"), /*#__PURE__*/ React.createElement("td", null, abv)), /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("th", {
         scope: "row"
@@ -30,7 +30,7 @@ function SpecTable({ abv , ibu , target_og , target_fg , ebc , srm , ph , attenu
             scope: "row"
         }, "Temprature")), /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("td", null, /*#__PURE__*/ React.createElement("strong", null, temp.value), /*#__PURE__*/ React.createElement("span", null, temp.unit))), /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("th", {
             scope: "row"
-        }, "duration")), /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("td", null, duration)))))));
+        }, "duration")), /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("td", null, duration))))))));
 }
 function BeerCard({ id , name , tagline , image_url , description , first_brewed , abv , ibu , ebc  }) {
     return /*#__PURE__*/ React.createElement("article", {

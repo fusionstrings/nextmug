@@ -6,12 +6,12 @@ import { api } from "#functions";
 import type { Beer } from "#types";
 
 type SearchFormProps = {
-  onSubmit: React.DOMAttributes<HTMLFormElement>;
-  onInput: React.DOMAttributes<HTMLInputElement>;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onInput: (event: React.FormEvent<HTMLInputElement>) => void;
+  handleMinAbvChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleMaxAbvChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
   filteredBeerList: Beer[];
-  handleMinAbvChange: React.ChangeEvent<HTMLInputElement>;
-  handleMaxAbvChange: React.ChangeEvent<HTMLInputElement>;
   minAbv: number;
   maxAbv: number;
 };
@@ -103,11 +103,11 @@ type Props = { beers: { number: Beer }; search: string };
 function BeerList({ beers, search }: Props) {
   const searchParams = new URLSearchParams(search);
 
-  const [allBeers, setAllBeers] = React.useState(beers);
-
   const [downloadedBeers, setDownloadedBeers] = React.useState(beers);
 
-  const [filteredBeerList, setFilteredBeerList] = React.useState(allBeers);
+  const [filteredBeerList, setFilteredBeerList] = React.useState(
+    downloadedBeers,
+  );
 
   const [searchTerm, setSearchTerm] = React.useState("");
 
@@ -116,6 +116,13 @@ function BeerList({ beers, search }: Props) {
   const [page, setPage] = React.useState(searchParams.get("page"));
   const [perPage, setPerPage] = React.useState(searchParams.get("per_page"));
   const [pageLoaded, setPageLoaded] = React.useState([page]);
+
+  const queryString = new URLSearchParams({
+    page,
+    per_page: perPage,
+    abv_lt: maxAbv,
+    abv_gt: minAbv,
+  }).toString();
 
   function handleSearchInput(event: React.FormEvent<HTMLInputElement>) {
     event.preventDefault();
@@ -167,23 +174,21 @@ function BeerList({ beers, search }: Props) {
     //setPage("1"); // Reset the page to the first page when applying the filter
   }, [downloadedBeers, searchTerm, minAbv, maxAbv]);
 
-  // React.useEffect(() => {
-  //   const nextPage = parseInt(page, 10) + 1;
-  //   api(`page=${nextPage}&per_page=${perPage}`).then((data) => {
-  //     setAllBeers({ ...allBeers, ...data.beers });
-  //   });
-  // }, [page, perPage]);
-
   React.useEffect(() => {
-    if (pageLoaded.includes(page)) {
-      return; // Skip if the page has already been loaded
-    }
+    // if (pageLoaded.includes(page)) {
+    //   return; // Skip if the page has already been loaded
+    // }
 
-    api(`page=${page}&per_page=${perPage}`).then((data) => {
-      setDownloadedBeers((prevDownloadedBeers) => ({ ...prevDownloadedBeers, ...data.beers }));
-      setPageLoaded([...pageLoaded, page]); // Mark the current page as loaded
+    api(queryString).then((data) => {
+      setDownloadedBeers((prevDownloadedBeers) => ({
+        ...prevDownloadedBeers,
+        ...data.beers,
+      }));
+      //setPageLoaded([...pageLoaded, page]); // Mark the current page as loaded
     });
-  }, [page, perPage, pageLoaded, downloadedBeers]);
+
+    window.history.replaceState({}, "", `/?${queryString}`);
+  }, [page, perPage, downloadedBeers, minAbv, maxAbv]);
 
   const previousPage = page ? parseInt(page, 10) - 1 : 0;
   const nextPage = page ? parseInt(page, 10) + 1 : 2;

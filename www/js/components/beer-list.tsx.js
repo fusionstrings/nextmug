@@ -68,9 +68,8 @@ function SearchForm({ onSubmit , onInput , value , filteredBeerList , handleMinA
 }
 function BeerList({ beers , search  }) {
     const searchParams = new URLSearchParams(search);
-    const [allBeers, setAllBeers] = React.useState(beers);
     const [downloadedBeers, setDownloadedBeers] = React.useState(beers);
-    const [filteredBeerList, setFilteredBeerList] = React.useState(allBeers);
+    const [filteredBeerList, setFilteredBeerList] = React.useState(downloadedBeers);
     const [searchTerm, setSearchTerm] = React.useState("");
     const [minAbv, setMinAbv] = React.useState(0);
     const [maxAbv, setMaxAbv] = React.useState(20);
@@ -79,6 +78,12 @@ function BeerList({ beers , search  }) {
     const [pageLoaded, setPageLoaded] = React.useState([
         page
     ]);
+    const queryString = new URLSearchParams({
+        page,
+        per_page: perPage,
+        abv_lt: maxAbv,
+        abv_gt: minAbv
+    }).toString();
     function handleSearchInput(event) {
         event.preventDefault();
         const { value  } = event?.currentTarget;
@@ -117,31 +122,24 @@ function BeerList({ beers , search  }) {
         minAbv,
         maxAbv
     ]);
-    // React.useEffect(() => {
-    //   const nextPage = parseInt(page, 10) + 1;
-    //   api(`page=${nextPage}&per_page=${perPage}`).then((data) => {
-    //     setAllBeers({ ...allBeers, ...data.beers });
-    //   });
-    // }, [page, perPage]);
     React.useEffect(()=>{
-        if (pageLoaded.includes(page)) {
-            return; // Skip if the page has already been loaded
-        }
-        api(`page=${page}&per_page=${perPage}`).then((data)=>{
+        // if (pageLoaded.includes(page)) {
+        //   return; // Skip if the page has already been loaded
+        // }
+        api(queryString).then((data)=>{
             setDownloadedBeers((prevDownloadedBeers)=>({
                     ...prevDownloadedBeers,
                     ...data.beers
                 }));
-            setPageLoaded([
-                ...pageLoaded,
-                page
-            ]); // Mark the current page as loaded
+        //setPageLoaded([...pageLoaded, page]); // Mark the current page as loaded
         });
+        window.history.replaceState({}, "", `/?${queryString}`);
     }, [
         page,
         perPage,
-        pageLoaded,
-        downloadedBeers
+        downloadedBeers,
+        minAbv,
+        maxAbv
     ]);
     const previousPage = page ? parseInt(page, 10) - 1 : 0;
     const nextPage = page ? parseInt(page, 10) + 1 : 2;

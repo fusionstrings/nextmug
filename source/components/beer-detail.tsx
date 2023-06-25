@@ -18,76 +18,78 @@ function SpecTable({
 }: SpecProps) {
   return (
     <table className="spec-table">
-      <tr>
-        <th scope="row">Alcohol By Volume (ABV)</th>
-        <td>{abv}</td>
-      </tr>
-      <tr>
-        <th scope="row">International Bitterness Units (IBU)</th>
-        <td>{ibu}</td>
-      </tr>
-      <tr>
-        <th scope="row">Original Gravity</th>
-        <td>{target_og}</td>
-      </tr>
-      <tr>
-        <th scope="row">Final Gravity</th>
-        <td>{target_fg}</td>
-      </tr>
-      <tr>
-        <th scope="row">European Brewery Convention (EBC)</th>
-        <td>{ebc}</td>
-      </tr>
-      <tr>
-        <th scope="row">Standard Reference Method (SRM)</th>
-        <td>{srm}</td>
-      </tr>
-      <tr>
-        <th scope="row">pH</th>
-        <td>{ph}</td>
-      </tr>
-      <tr>
-        <th scope="row">Attenuation Level</th>
-        <td>{attenuation_level}</td>
-      </tr>
-      <tr>
-        <th scope="row">Volume</th>
-        <td>
-          <strong>{volume.value}</strong>
-          <span>{volume.unit}</span>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">Boil Volume</th>
-        <td>
-          <strong>{boil_volume.value}</strong>
-          <span>{boil_volume.unit}</span>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">Method</th>
-        <td>
-          {method.mash_temp.map(({ temp, duration }, index) => (
-            <table key={`${temp}-${duration}-${index}`}>
-              <tr>
-                <th scope="row">Temprature</th>
-              </tr>
-              <tr>
-                <td>
-                  <strong>{temp.value}</strong>
-                  <span>{temp.unit}</span>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">duration</th>
-              </tr>
-              <tr>
-                <td>{duration}</td>
-              </tr>
-            </table>
-          ))}
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <th scope="row">Alcohol By Volume (ABV)</th>
+          <td>{abv}</td>
+        </tr>
+        <tr>
+          <th scope="row">International Bitterness Units (IBU)</th>
+          <td>{ibu}</td>
+        </tr>
+        <tr>
+          <th scope="row">Original Gravity</th>
+          <td>{target_og}</td>
+        </tr>
+        <tr>
+          <th scope="row">Final Gravity</th>
+          <td>{target_fg}</td>
+        </tr>
+        <tr>
+          <th scope="row">European Brewery Convention (EBC)</th>
+          <td>{ebc}</td>
+        </tr>
+        <tr>
+          <th scope="row">Standard Reference Method (SRM)</th>
+          <td>{srm}</td>
+        </tr>
+        <tr>
+          <th scope="row">pH</th>
+          <td>{ph}</td>
+        </tr>
+        <tr>
+          <th scope="row">Attenuation Level</th>
+          <td>{attenuation_level}</td>
+        </tr>
+        <tr>
+          <th scope="row">Volume</th>
+          <td>
+            <strong>{volume.value}</strong>
+            <span>{volume.unit}</span>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Boil Volume</th>
+          <td>
+            <strong>{boil_volume.value}</strong>
+            <span>{boil_volume.unit}</span>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Method</th>
+          <td>
+            {method.mash_temp.map(({ temp, duration }, index) => (
+              <table key={`${temp}-${duration}-${index}`}>
+                <tr>
+                  <th scope="row">Temprature</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>{temp.value}</strong>
+                    <span>{temp.unit}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">duration</th>
+                </tr>
+                <tr>
+                  <td>{duration}</td>
+                </tr>
+              </table>
+            ))}
+          </td>
+        </tr>
+      </tbody>
     </table>
   );
 }
