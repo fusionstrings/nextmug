@@ -54,17 +54,10 @@ function BeerPage(
       <body>
         <header>
           <h1 className="logo"><a href="/">Next Mug</a></h1>
-          <nav>
-            <ul>
-              <li>
-                <a href="/beers/random">Random Beer</a>
-              </li>
-            </ul>
-          </nav>
         </header>
         <main>
           <div id="beers-page">
-            {detail ?  <BeerDetail {...beer} /> : <BeerList beers={beers} detail={detail} />}
+            <BeerDetail {...beer} />
           </div>
         </main>
         <footer></footer>

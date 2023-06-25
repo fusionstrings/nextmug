@@ -9,10 +9,24 @@ async function requestHandlerHTTP(request: Request) {
 
     const importmap = await Deno.readTextFile(`${Deno.cwd()}/importmap.json`);
 
+    const { searchParams } = new URL(request.url);
+
+    const page = searchParams.get("page") || "";
+
+    if (!page) {
+      searchParams.append("page", "1");
+    }
+
+    const perPage = searchParams.get("per_page") || "";
+
+    if (!perPage) {
+      searchParams.append("per_page", "80");
+    }
+
     const stream = await renderToReadableStream(
       <HomePage importmap={importmap} beers={beers} />,
       {
-        bootstrapModules: ["/js/home-dom.tsx.js"],
+        bootstrapModules: [`/js/home-dom.tsx.js?${searchParams.toString()}`],
       },
     );
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BeerOverview } from "#beer-detail";
+import { BeerCard } from "#beer-detail";
 
 import type { Beer } from "#types";
 
@@ -31,7 +31,7 @@ function SearchForm(
     <div>
       <form
         method="GET"
-        action="/beers"
+        action="/"
         onSubmit={onSubmit}
         id="search-form"
         name="search-form"
@@ -96,7 +96,9 @@ function SearchForm(
   );
 }
 
-function BeerList({ beers }) {
+type Props = { beers: { number: Beer } };
+
+function BeerList({ beers }: Props) {
   const [allBeers, setAllBeers] = React.useState(beers);
 
   const [filteredBeerList, setFilteredBeerList] = React.useState(allBeers);
@@ -144,7 +146,7 @@ function BeerList({ beers }) {
     }
 
     setFilteredBeerList(filteredData);
-  }, [searchTerm, minAbv, maxAbv]);
+  }, [allBeers, searchTerm, minAbv, maxAbv]);
 
   return (
     <React.Fragment>
@@ -158,9 +160,9 @@ function BeerList({ beers }) {
         minAbv={minAbv}
         maxAbv={maxAbv}
       />
-      <div className="beer-catalog">
+      <div className="beer-list">
         {Object.entries(filteredBeerList).map(([id, beer]) => (
-          <BeerOverview key={id} {...beer} />
+          <BeerCard key={id} {...beer} />
         ))}
       </div>
     </React.Fragment>

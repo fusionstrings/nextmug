@@ -52,6 +52,10 @@ header {
     text-align: center;
 }
 
+p {
+    margin-bottom: var(--step-1);
+}
+
 .hide {
     display: none;
 }
@@ -198,58 +202,52 @@ header {
     text-decoration: none;
 }
 
-.beer-overview {
+
+
+@media (width > 700px) {
+    .beer-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--step-1);
+    }
+}
+
+@media (width > 870px) {
+    .beer-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: var(--step-2);
+    }
+}
+
+
+.beer-list h3 {
+    font-size: var(--step-0);
+    margin-bottom: var(--step-1);
+    font-weight: 300;
+}
+
+.beer-card {
     /* display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--step-2); */
-    margin: var(--step-2);
-    margin-top: 0;
+    margin: 0 0 var(--step-2);
     /* min-width: 250px; */
     text-align: center;
     /* border-top: 2px solid; */
     border-bottom: 2px solid;
 }
 
-.beer-overview img {
+.beer-card img {
     height: 200px;
     display: inline-block;
 }
 
-.logo {
-    text-align: center;
-    display: inline-block;
-    background: url('/images/favicon.svg') no-repeat left center;
-    font-family: 'Striper', sans-serif;
-}
-
-.logo a {
+.beer-card a {
     color: var(--text-color-body);
     text-decoration: none;
-    font-family: 'Striper', sans-serif;
-    text-indent: 58px;
-    display: inline-block;
 }
 
-@media (width > 700px) {
-    .beer-catalog {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-}
-
-@media (width > 870px) {
-    .beer-catalog {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    }
-}
-
-
-.beer-catalog h3 {
-    font-size: var(--step-0);
-    margin-bottom: var(--step-1);
-    font-weight: 300;
-}
 
 .pill {
     display: inline-block;
@@ -277,4 +275,75 @@ header {
     justify-content: space-evenly;
     align-content: center;
     align-items: center;
+}
+
+.highlight a {
+    color: var(--text-color-link);
+}
+
+.logo {
+    text-align: center;
+    display: inline-block;
+    background: url('/images/favicon.svg') no-repeat left center;
+    font-family: 'Striper', sans-serif;
+}
+
+.logo a {
+    color: var(--text-color-body);
+    text-decoration: none;
+    font-family: 'Striper', sans-serif;
+    text-indent: 58px;
+    display: inline-block;
+}
+
+.beer-detail h3 {
+    font-size: var(--step-1);
+}
+
+.beer-detail time {
+    color: darkorange;
+    margin: var(--step-1) 0;
+    display: block;
+}
+
+.beer-detail img {
+    max-height: 350px;
+    /* display: block;
+    margin: var(--step-1) auto; */
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: var(--step-3) auto;
+    border-top: 5px solid black;
+    border-bottom: 5px solid;
+    padding: var(--step-3);
+}
+
+.hero p {
+    max-width: 350px;
+}
+
+.spec-table {
+    text-align: left;
+    font-size: var(--step--2);
+}
+
+.beer-detail strong {
+    margin-right: 5px;
+}
+
+.hops > div{
+    margin: var(--step-1) 0;
+    border-bottom: 2px solid;
+}
+
+@media (width > 700px) {
+    .hops {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--step-1);
+    }
 }

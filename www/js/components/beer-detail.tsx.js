@@ -1,6 +1,8 @@
-import * as React from 'react';
-function Properties({ abv , ibu , target_og , target_fg , ebc , srm , ph , attenuation_level , volume , boil_volume , method , first_brewed , description  }) {
-    return /*#__PURE__*/ React.createElement(React.Fragment, null, /*#__PURE__*/ React.createElement("time", null, first_brewed), /*#__PURE__*/ React.createElement("p", null, description), /*#__PURE__*/ React.createElement("table", null, /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("th", {
+import * as React from "react";
+function SpecTable({ abv , ibu , target_og , target_fg , ebc , srm , ph , attenuation_level , volume , boil_volume , method , first_brewed , description  }) {
+    return /*#__PURE__*/ React.createElement("table", {
+        className: "spec-table"
+    }, /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("th", {
         scope: "row"
     }, "Alcohol By Volume (ABV)"), /*#__PURE__*/ React.createElement("td", null, abv)), /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("th", {
         scope: "row"
@@ -26,35 +28,40 @@ function Properties({ abv , ibu , target_og , target_fg , ebc , srm , ph , atten
             key: `${temp}-${duration}-${index}`
         }, /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("th", {
             scope: "row"
-        }, "Temprature"), /*#__PURE__*/ React.createElement("td", null, /*#__PURE__*/ React.createElement("strong", null, temp.value), /*#__PURE__*/ React.createElement("span", null, temp.unit))), /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("th", {
+        }, "Temprature")), /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("td", null, /*#__PURE__*/ React.createElement("strong", null, temp.value), /*#__PURE__*/ React.createElement("span", null, temp.unit))), /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("th", {
             scope: "row"
-        }, "duration"), /*#__PURE__*/ React.createElement("td", null, duration))))))));
+        }, "duration")), /*#__PURE__*/ React.createElement("tr", null, /*#__PURE__*/ React.createElement("td", null, duration)))))));
 }
-function BeerOverview({ id , name , tagline , image_url , description , first_brewed , abv , ibu , ebc  }) {
+function BeerCard({ id , name , tagline , image_url , description , first_brewed , abv , ibu , ebc  }) {
     return /*#__PURE__*/ React.createElement("article", {
         key: id,
-        className: "beer-overview"
+        className: "beer-card"
+    }, /*#__PURE__*/ React.createElement("a", {
+        href: `/beers/${id}`
     }, /*#__PURE__*/ React.createElement("h3", null, name), /*#__PURE__*/ React.createElement("figure", null, /*#__PURE__*/ React.createElement("img", {
         src: image_url
-    })), /*#__PURE__*/ React.createElement("p", null, tagline), /*#__PURE__*/ React.createElement("div", {
+    })), /*#__PURE__*/ React.createElement("p", null, tagline)), /*#__PURE__*/ React.createElement("div", {
         className: "highlight"
     }, "Since ", /*#__PURE__*/ React.createElement("time", null, first_brewed), /*#__PURE__*/ React.createElement("a", {
         className: "pill",
-        href: `beers?abv=${abv}`
+        href: `/?abv=${abv}`
     }, "ABV ", abv), /*#__PURE__*/ React.createElement("a", {
         className: "pill",
-        href: `beers?ibu=${ibu}`
+        href: `/?ibu=${ibu}`
     }, "IBU ", ibu), /*#__PURE__*/ React.createElement("a", {
         className: "pill",
-        href: `beers?ebc=${ebc}`
+        href: `/?ebc=${ebc}`
     }, "EBC ", ebc)));
 }
 function BeerDetail({ id , name , tagline , image_url , description , first_brewed , abv , ibu , target_og , target_fg , ebc , srm , ph , attenuation_level , volume , boil_volume , method , ingredients , food_pairing , brewers_tips , contributed_by  }) {
     return /*#__PURE__*/ React.createElement("article", {
-        key: id
-    }, /*#__PURE__*/ React.createElement("h2", null, name), /*#__PURE__*/ React.createElement("h3", null, tagline), /*#__PURE__*/ React.createElement("time", null, first_brewed), /*#__PURE__*/ React.createElement("img", {
+        key: id,
+        className: "beer-detail"
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "hero"
+    }, /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("h2", null, name), /*#__PURE__*/ React.createElement("h3", null, tagline), /*#__PURE__*/ React.createElement("time", null, "Brewing since ", first_brewed), /*#__PURE__*/ React.createElement("p", null, description)), /*#__PURE__*/ React.createElement("img", {
         src: image_url
-    }), /*#__PURE__*/ React.createElement("p", null, description), /*#__PURE__*/ React.createElement(Properties, {
+    })), /*#__PURE__*/ React.createElement(SpecTable, {
         abv: abv,
         ibu: ibu,
         target_og: target_og,
@@ -68,12 +75,14 @@ function BeerDetail({ id , name , tagline , image_url , description , first_brew
         method: method,
         first_brewed: first_brewed,
         description: description
-    }), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("h4", null, "Ingredients"), /*#__PURE__*/ React.createElement("h5", null, "Malts"), ingredients?.malt.map(({ name , amount  }, index)=>/*#__PURE__*/ React.createElement("p", {
+    }), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("h4", null, "Ingredients"), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("h5", null, "Malts"), ingredients?.malt.map(({ name , amount  }, index)=>/*#__PURE__*/ React.createElement("p", {
             key: `${name}-${amount}-${index}`
-        }, /*#__PURE__*/ React.createElement("strong", null, name), /*#__PURE__*/ React.createElement("strong", null, amount.value), /*#__PURE__*/ React.createElement("span", null, amount.unit))), /*#__PURE__*/ React.createElement("h5", null, "Hops"), ingredients?.hops.map(({ name , amount , add , attribute  }, index)=>/*#__PURE__*/ React.createElement(React.Fragment, {
+        }, /*#__PURE__*/ React.createElement("strong", null, name), /*#__PURE__*/ React.createElement("span", null, amount.value, " ", amount.unit)))), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("h5", null, "Hops"), /*#__PURE__*/ React.createElement("div", {
+        className: "hops"
+    }, ingredients?.hops.map(({ name , amount , add , attribute  }, index)=>/*#__PURE__*/ React.createElement("div", {
             key: `${name}-${amount}-${index}`
-        }, /*#__PURE__*/ React.createElement("p", null, /*#__PURE__*/ React.createElement("strong", null, name), /*#__PURE__*/ React.createElement("strong", null, amount.value), /*#__PURE__*/ React.createElement("span", null, amount.unit)), /*#__PURE__*/ React.createElement("p", null, "Add: ", add), /*#__PURE__*/ React.createElement("p", null, "Attribute: ", attribute))), /*#__PURE__*/ React.createElement("h5", null, "Yeast"), /*#__PURE__*/ React.createElement("p", null, ingredients.yeast)), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("h4", null, "Food Pairing"), /*#__PURE__*/ React.createElement("p", null, food_pairing.map((food, index)=>/*#__PURE__*/ React.createElement("span", {
+        }, /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("p", null, /*#__PURE__*/ React.createElement("strong", null, name), /*#__PURE__*/ React.createElement("span", null, amount.value, " ", amount.unit))), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("p", null, "Add: ", add), /*#__PURE__*/ React.createElement("p", null, "Attribute: ", attribute)))))), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("h5", null, "Yeast"), /*#__PURE__*/ React.createElement("p", null, ingredients.yeast))), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("h4", null, "Food Pairing"), /*#__PURE__*/ React.createElement("p", null, food_pairing.map((food, index)=>/*#__PURE__*/ React.createElement("span", {
             key: `${food}-${index}`
-        }, food)))), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("h4", null, "Brewers Tips"), /*#__PURE__*/ React.createElement("p", null, brewers_tips)), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("h4", null, "Contributed by"), /*#__PURE__*/ React.createElement("p", null, contributed_by)));
+        }, food)))), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("h4", null, "Brewers Tips"), /*#__PURE__*/ React.createElement("p", null, brewers_tips)), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("h4", null, "Contributed by"), /*#__PURE__*/ React.createElement("p", null, contributed_by))));
 }
-export { BeerDetail, BeerOverview };
+export { BeerCard, BeerDetail };

@@ -22,7 +22,7 @@ async function api(url) {
         }
         const perPage = searchParams.get("per_page") || "";
         if (!perPage) {
-            searchParams.append("per_page", "25");
+            searchParams.append("per_page", "80");
         }
         const searchTermABV = searchParams.get("abv") || "";
         const searchTermIBU = searchParams.get("ibu") || "";

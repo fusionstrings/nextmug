@@ -10,7 +10,6 @@ async function requestHandlerHTTP(request: Request) {
     const match = pattern.exec({ pathname });
 
     let beers;
-    let detail = false;
 
     if (match) {
       const { beer } = match.pathname.groups;
@@ -30,17 +29,14 @@ async function requestHandlerHTTP(request: Request) {
 
         beers = beerData.default;
       }
-      detail = true;
     } else {
       const randomBeer = await fetch("https://api.punkapi.com/v2/beers/random");
       beers = await randomBeer.json();
     }
     const importmap = await Deno.readTextFile(`${Deno.cwd()}/importmap.json`);
 
-    console.log("detail", detail);
-
     const stream = await renderToReadableStream(
-      <BeerPage importmap={importmap} beers={beers} detail={detail} />,
+      <BeerPage importmap={importmap} beers={beers} />,
       {
         bootstrapModules: ["/js/beers-dom.tsx.js"],
       },
@@ -58,7 +54,7 @@ async function requestHandlerHTTP(request: Request) {
     const importmap = await Deno.readTextFile(`${Deno.cwd()}/importmap.json`);
 
     const stream = await renderToReadableStream(
-      <BeerPage importmap={importmap} beers={beers} detail />,
+      <BeerPage importmap={importmap} beers={beers} />,
       {
         bootstrapModules: ["/js/beers-dom.tsx.js"],
       },

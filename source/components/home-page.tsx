@@ -1,9 +1,10 @@
-import * as React from 'react';
+import * as React from "react";
 import { BeerList } from "#beer-list";
 import type { Beer } from "#types";
 
+type Props = { beers: { number: Beer }; importmap: string };
 function HomePage(
-  { beers, importmap }: { importmap: string },
+  { beers, importmap }: Props,
 ) {
   return (
     <html lang="en">
@@ -49,7 +50,9 @@ function HomePage(
       </head>
       <body>
         <header>
-          <h1 className="logo"><a href="/">Next Mug</a></h1>
+          <h1 className="logo">
+            <a href="/">Next Mug</a>
+          </h1>
         </header>
         <main>
           <div id="home-page">

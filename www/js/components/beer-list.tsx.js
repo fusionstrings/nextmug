@@ -1,10 +1,10 @@
 import * as React from "react";
-import { BeerOverview } from "#beer-detail";
+import { BeerCard } from "#beer-detail";
 function SearchForm({ onSubmit , onInput , value , filteredBeerList , handleMinAbvChange , handleMaxAbvChange , minAbv , maxAbv  }) {
     const beerList = Object.entries(filteredBeerList);
     return /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("form", {
         method: "GET",
-        action: "/beers",
+        action: "/",
         onSubmit: onSubmit,
         id: "search-form",
         name: "search-form",
@@ -98,6 +98,7 @@ function BeerList({ beers  }) {
         }
         setFilteredBeerList(filteredData);
     }, [
+        allBeers,
         searchTerm,
         minAbv,
         maxAbv
@@ -112,8 +113,8 @@ function BeerList({ beers  }) {
         minAbv: minAbv,
         maxAbv: maxAbv
     }), /*#__PURE__*/ React.createElement("div", {
-        className: "beer-catalog"
-    }, Object.entries(filteredBeerList).map(([id, beer])=>/*#__PURE__*/ React.createElement(BeerOverview, {
+        className: "beer-list"
+    }, Object.entries(filteredBeerList).map(([id, beer])=>/*#__PURE__*/ React.createElement(BeerCard, {
             key: id,
             ...beer
         }))));
