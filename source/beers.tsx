@@ -36,10 +36,7 @@ async function requestHandlerHTTP(request: Request) {
     const importmap = await Deno.readTextFile(`${Deno.cwd()}/importmap.json`);
 
     const stream = await renderToReadableStream(
-      <BeerPage importmap={importmap} beers={beers} />,
-      {
-        bootstrapModules: ["/js/beers-dom.tsx.js"],
-      },
+      <BeerPage importmap={importmap} beers={beers} />
     );
 
     return new Response(stream, {

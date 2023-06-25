@@ -25,7 +25,7 @@ async function beers() {
     try {
         const result = await transpile(`${Deno.cwd()}/source/beers-dom.tsx`, { importMap: `${Deno.cwd()}/transpile.importmap`, compilerOptions: { sourceMap: true } });
         result.forEach(write);
-        console.log('beers transpilesd');
+        console.log('beers transpiled');
     } catch (error) {
         console.error(error.message)
     }
@@ -35,7 +35,7 @@ async function home() {
     try {
         const result = await transpile(`${Deno.cwd()}/source/home-dom.tsx`, { importMap: `${Deno.cwd()}/transpile.importmap`, compilerOptions: { sourceMap: true } });
         result.forEach(write);
-        console.log('home transpilesd');
+        console.log('home transpiled');
     } catch (error) {
         console.error(error.message)
     }
