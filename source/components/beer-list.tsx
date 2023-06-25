@@ -105,6 +105,8 @@ function BeerList({ beers, search }: Props) {
 
   const [allBeers, setAllBeers] = React.useState(beers);
 
+  const [downloadedBeers, setDownloadedBeers] = React.useState(beers);
+
   const [filteredBeerList, setFilteredBeerList] = React.useState(allBeers);
 
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -134,12 +136,21 @@ function BeerList({ beers, search }: Props) {
 
   function handleSearchFormSubmit(event: SubmitEvent) {
     event.preventDefault();
+    setPage("1");
+  }
+
+  function handlePagination(
+    event: React.MouseEvent<HTMLAnchorElement>,
+    pageNumber: number,
+  ) {
+    event.preventDefault();
+    setPage(`${pageNumber}`);
   }
 
   React.useEffect(() => {
     const filteredData = {};
 
-    for (const [key, value] of Object.entries(allBeers)) {
+    for (const [key, value] of Object.entries(downloadedBeers)) {
       const nameMatch = value.name.toLowerCase().includes(
         searchTerm.toLowerCase(),
       );
@@ -153,7 +164,8 @@ function BeerList({ beers, search }: Props) {
     }
 
     setFilteredBeerList(filteredData);
-  }, [allBeers, searchTerm, minAbv, maxAbv]);
+    //setPage("1"); // Reset the page to the first page when applying the filter
+  }, [downloadedBeers, searchTerm, minAbv, maxAbv]);
 
   // React.useEffect(() => {
   //   const nextPage = parseInt(page, 10) + 1;
@@ -161,6 +173,17 @@ function BeerList({ beers, search }: Props) {
   //     setAllBeers({ ...allBeers, ...data.beers });
   //   });
   // }, [page, perPage]);
+
+  React.useEffect(() => {
+    if (pageLoaded.includes(page)) {
+      return; // Skip if the page has already been loaded
+    }
+
+    api(`page=${page}&per_page=${perPage}`).then((data) => {
+      setDownloadedBeers((prevDownloadedBeers) => ({ ...prevDownloadedBeers, ...data.beers }));
+      setPageLoaded([...pageLoaded, page]); // Mark the current page as loaded
+    });
+  }, [page, perPage, pageLoaded, downloadedBeers]);
 
   const previousPage = page ? parseInt(page, 10) - 1 : 0;
   const nextPage = page ? parseInt(page, 10) + 1 : 2;
@@ -183,10 +206,22 @@ function BeerList({ beers, search }: Props) {
         ))}
       </div>
       <div className="pagination">
-        {previousPage < 1
-          ? <a href={`/?page=${previousPage}`}>Previous</a>
-          : <span />}
-        <a href={`/?page=${nextPage}`}>Next</a>
+        {previousPage >= 1 && (
+          <a
+            href={`/?page=${previousPage}`}
+            onClick={(event) => handlePagination(event, previousPage)}
+          >
+            Previous
+          </a>
+        )}
+        {nextPage >= 1 && (
+          <a
+            href={`/?page=${nextPage}`}
+            onClick={(event) => handlePagination(event, nextPage)}
+          >
+            Next
+          </a>
+        )}
       </div>
     </React.Fragment>
   );

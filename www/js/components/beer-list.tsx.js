@@ -1,5 +1,6 @@
 import * as React from "react";
 import { BeerCard } from "#beer-detail";
+import { api } from "#functions";
 function SearchForm({ onSubmit , onInput , value , filteredBeerList , handleMinAbvChange , handleMaxAbvChange , minAbv , maxAbv  }) {
     const beerList = Object.entries(filteredBeerList);
     return /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("form", {
@@ -68,6 +69,7 @@ function SearchForm({ onSubmit , onInput , value , filteredBeerList , handleMinA
 function BeerList({ beers , search  }) {
     const searchParams = new URLSearchParams(search);
     const [allBeers, setAllBeers] = React.useState(beers);
+    const [downloadedBeers, setDownloadedBeers] = React.useState(beers);
     const [filteredBeerList, setFilteredBeerList] = React.useState(allBeers);
     const [searchTerm, setSearchTerm] = React.useState("");
     const [minAbv, setMinAbv] = React.useState(0);
@@ -92,10 +94,15 @@ function BeerList({ beers , search  }) {
     }
     function handleSearchFormSubmit(event) {
         event.preventDefault();
+        setPage("1");
+    }
+    function handlePagination(event, pageNumber) {
+        event.preventDefault();
+        setPage(`${pageNumber}`);
     }
     React.useEffect(()=>{
         const filteredData = {};
-        for (const [key, value] of Object.entries(allBeers)){
+        for (const [key, value] of Object.entries(downloadedBeers)){
             const nameMatch = value.name.toLowerCase().includes(searchTerm.toLowerCase());
             const abvMatch = (!minAbv || value.abv >= minAbv) && (!maxAbv || value.abv <= maxAbv);
             if (nameMatch && abvMatch) {
@@ -103,8 +110,9 @@ function BeerList({ beers , search  }) {
             }
         }
         setFilteredBeerList(filteredData);
+    //setPage("1"); // Reset the page to the first page when applying the filter
     }, [
-        allBeers,
+        downloadedBeers,
         searchTerm,
         minAbv,
         maxAbv
@@ -115,6 +123,26 @@ function BeerList({ beers , search  }) {
     //     setAllBeers({ ...allBeers, ...data.beers });
     //   });
     // }, [page, perPage]);
+    React.useEffect(()=>{
+        if (pageLoaded.includes(page)) {
+            return; // Skip if the page has already been loaded
+        }
+        api(`page=${page}&per_page=${perPage}`).then((data)=>{
+            setDownloadedBeers((prevDownloadedBeers)=>({
+                    ...prevDownloadedBeers,
+                    ...data.beers
+                }));
+            setPageLoaded([
+                ...pageLoaded,
+                page
+            ]); // Mark the current page as loaded
+        });
+    }, [
+        page,
+        perPage,
+        pageLoaded,
+        downloadedBeers
+    ]);
     const previousPage = page ? parseInt(page, 10) - 1 : 0;
     const nextPage = page ? parseInt(page, 10) + 1 : 2;
     return /*#__PURE__*/ React.createElement(React.Fragment, null, /*#__PURE__*/ React.createElement(SearchForm, {
@@ -133,10 +161,12 @@ function BeerList({ beers , search  }) {
             ...beer
         }))), /*#__PURE__*/ React.createElement("div", {
         className: "pagination"
-    }, previousPage < 1 ? /*#__PURE__*/ React.createElement("a", {
-        href: `/?page=${previousPage}`
-    }, "Previous") : /*#__PURE__*/ React.createElement("span", null), /*#__PURE__*/ React.createElement("a", {
-        href: `/?page=${nextPage}`
+    }, previousPage >= 1 && /*#__PURE__*/ React.createElement("a", {
+        href: `/?page=${previousPage}`,
+        onClick: (event)=>handlePagination(event, previousPage)
+    }, "Previous"), nextPage >= 1 && /*#__PURE__*/ React.createElement("a", {
+        href: `/?page=${nextPage}`,
+        onClick: (event)=>handlePagination(event, nextPage)
     }, "Next")));
 }
 export { BeerList };

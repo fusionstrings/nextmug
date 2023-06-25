@@ -35,6 +35,7 @@
     "https://api.punkapi.com/v2/beers?page=1&per_page=80": "a9facb36e312f71c39b5e8c29ac527e125d3f528a5742791482587d8871a8e5e",
     "https://api.punkapi.com/v2/beers?page=2&per_page=50": "6061709a3a5be2196ed49a64154eee40dfb4f30329e882676ba793ca32e5d722",
     "https://api.punkapi.com/v2/beers?page=2&per_page=80": "c027a1118b452e6272b095ad084cffb264620c129ea9232389edc3024203c9e1",
+    "https://api.punkapi.com/v2/beers?page=3&per_page=25": "2027e928ea3ddee63542bc914c0b1836581fa638ce9550d21c06c0402a6b83c4",
     "https://api.punkapi.com/v2/beers?page=3&per_page=80": "64e2c989c3c832058f2587e10a7ae210b23fe5395732e3469ce5a2019cbc66fe",
     "https://api.punkapi.com/v2/beers?page=4&per_page=80": "584a80d738cb5f0dd4cafe0206124305f97530f2307a3e08493bc5570ea20469",
     "https://api.punkapi.com/v2/beers?page=5&per_page=80": "bc85e9050bb0816362a385139f481784c85a7377427eb4580239b701280e4e1c",
